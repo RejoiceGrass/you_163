@@ -33,10 +33,19 @@
       </van-swipe-item>
     </van-swipe>
     <!-- 滚动条下的广告-->
-    <van-row>
-      <van-col span="8">span: 8</van-col>
-      <van-col span="8">span: 8</van-col>
-      <van-col span="8">span: 8</van-col>
+    <van-row class="service_info">
+      <van-col span="8">
+        <i class="icon" style="background-image: url('https://yanxuan.nosdn.127.net/a03dd909803b9ac032eba58b7253a2f6.png')"></i>
+        <span>网易自营品牌</span>
+      </van-col>
+      <van-col span="8">
+        <i class="icon"  style="background-image: url('https://yanxuan.nosdn.127.net/2d0402ffcd52b3ec3b07422681c42a89.png')"></i>
+        <span>30天无忧退货</span>
+      </van-col>
+      <van-col span="8">
+        <i class="icon"  style="background-image: url('https://yanxuan.nosdn.127.net/eb61ee48e8942dbd1784c9ee75ebe955.png')"></i>
+        <span>48小时快速退款</span>
+      </van-col>
     </van-row>
   </div>
 </template>
@@ -75,17 +84,17 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  justify-content: center;
+  position: relative;
 }
 .logo {
   width: 2rem;
   display: inline-block;
-  /* margin: .55rem 0 0 0.2rem; */
+  margin: .1rem 0 0 0.2rem;
   height: 1rem;
 }
 .header-search {
-  /* margin: .55rem 0 1rem 0; */
-  width: 6rem;
+  margin: .1rem 0 0 0;
+  width: 5.8rem;
   height: 1rem;
   border: 0;
   padding: 0;
@@ -93,8 +102,8 @@ export default {
   border-radius: 2rem;
 }
 .loginBtn {
-  /* margin: 0.6rem 0 0 0; */
-  width: 3rem;
+  margin: 0.1rem 0 0 0;
+  width: 2rem;
   height: 1rem;
   color: red;
   border: 1px solid red;
@@ -107,5 +116,22 @@ export default {
 /* 轮播图 */
 .myswipe {
   width: 100%;
+}
+/* 广告 */
+.service_info{
+  display: flex;
+  flex-flow:row nowrap;
+  justify-content: center;
+  text-align: center;
+  height: 1rem;
+  line-height: 1rem;
+}
+.service_info i.icon{
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: .6rem;
+  height: .6rem;
+  vertical-align: middle;
 }
 </style>
