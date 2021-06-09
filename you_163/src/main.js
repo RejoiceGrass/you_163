@@ -4,9 +4,9 @@ import './assets/rem'
 import App from './App'
 import Vue from 'vue'
 import router from './router'
-import {Button,Row,Col,Search} from 'vant'
+import {Button,Row,Col,Search,Swipe,SwipeItem,Tab,Tabs} from 'vant'
 
-Vue.use(Button).use(Row).use(Col).use(Search);
+Vue.use(Button).use(Row).use(Col).use(Search).use(Swipe).use(SwipeItem).use(Tab).use(Tabs);
 
 Vue.config.productionTip = false
 
