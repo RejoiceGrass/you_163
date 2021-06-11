@@ -76,101 +76,58 @@
         <a href="#">更多</a>
       </h1>
     </div>
-
+    <!-- 新品首发 -->
+    <van-grid :column-num="3">
+      <van-grid-item v-for="(goods, inx) in goods_icon" :key="inx" text="文字">
+        <img src="goods.imgUrl" />
+        <div>{{ goods.goods_txt }}</div>
+      </van-grid-item>
+    </van-grid>
+    <!-- 顶页面 -->
+    <div style="height: 3rem; background: #666; font-size: 0.5rem; color: #fff">
+      footer div
+    </div>
     <!-- 底部tabbar -->
-  <van-tabbar v-model="active" active-color="#ee0a24">
-    <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-    <van-tabbar-item icon="search" dot>分类</van-tabbar-item>
-    <van-tabbar-item icon="friends-o" badge="5">值得买</van-tabbar-item>
-    <van-tabbar-item icon="setting-o" badge="20">购物车</van-tabbar-item>
-    <van-tabbar-item icon="setting-o" badge="20">个人</van-tabbar-item>
-  </van-tabbar>
+    <van-tabbar v-model="active" active-color="#ee0a24">
+      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item icon="search" dot>分类</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" badge="5">值得买</van-tabbar-item>
+      <van-tabbar-item icon="setting-o" badge="20">购物车</van-tabbar-item>
+      <van-tabbar-item icon="setting-o" badge="20">个人</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "home",
   data() {
     return {
       search_v: "",
-      tabBtnList: [
-        "推荐",
-        "居家生活",
-        "服饰鞋包",
-        "美食酒水",
-        "个护清洁",
-        "母婴亲子",
-        "运动旅行",
-        "数码家电",
-        "严选全球",
-      ],
-      imgObj: [
-        "https://yanxuan.nosdn.127.net/bc462b22ff836612ff9aa7f10090ee3d.jpg?type=webp&imageView&quality=75&thumbnail=750x0",
-        "https://yanxuan.nosdn.127.net/1349d7a9a81f90b39578f0b69d39bac7.jpg?type=webp&imageView&quality=75&thumbnail=750x0",
-        "https://yanxuan.nosdn.127.net/3d61a8db02d1aa7ef0b4da1b7b6a8fdd.png?type=webp&imageView&quality=75&thumbnail=750x0",
-        "https://yanxuan.nosdn.127.net/976b254bb78e067bf5830153b28b8502.jpg?type=webp&imageView&quality=75&thumbnail=750x0",
-      ],
-      goods_icon: [
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png",
-          goods_txt: "新品首发",
-        },
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png",
-          goods_txt: "居家生活",
-        },
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/896a3beac514ae8f40aafe028e5fec56.png",
-          goods_txt: "服饰鞋包",
-        },
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/37520d1204a0c55474021b43dac2a69e.png",
-          goods_txt: "美食酒水",
-        },
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/6c3bd9d885c818b1f73e497335a68b47.png",
-          goods_txt: "个护清洁",
-        },
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/559d2a240ec20b096590a902217009ff.png",
-          goods_txt: "母樱亲子",
-        },
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/f7281169d4e82d5d8d52aa1fec83fe01.png",
-          goods_txt: "运动旅行",
-        },
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/5c088559ebcc3f0ffcda663f04dfbeb2.png",
-          goods_txt: "数码家电",
-        },
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/fbca8e1f2948f0c09fc7672c2c125384.png",
-          goods_txt: "全球特色",
-        },
-        {
-          imgUrl:
-            "https://yanxuan.nosdn.127.net/12e8efd15b9b210ab156a7ee9b340548.gif",
-          goods_txt: "好货抄底",
-        },
-      ],
-      active:'',
+      tabBtnList: "",
+      imgObj:"",
+      goods_icon:"",
+      active: "",
     };
+  },
+  created() {
+    axios.get("http://localhost:5555/get_tabble_list").then((_d) => {
+      console.log(_d.data);
+      this.tabBtnList = _d.data;
+    });
+    axios.get("http://localhost:5555/get_imgObj").then((_d) => {
+      this.imgObj = _d.data;
+    });
+    axios.get("http://localhost:5555/get_goods_icon").then((_d) => {
+      this.goods_icon = _d.data;
+    });
   },
 };
 </script>
 
 <style>
-
 /* header */
 .header-div {
   display: flex;
@@ -227,9 +184,18 @@ export default {
   vertical-align: middle;
 }
 /* 新品首发*/
-.goodsListDiv{
-  clear:both;
-  margin: .2rem 0 ;
-  background: red;
+.goodsListDiv {
+  clear: both;
+  margin: 0 0.2rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
+}
+.goodsListDiv h1 label {
+  float: left;
+  font-size: 0.5rem;
+}
+.goodsListDiv h1 a {
+  float: right;
+  font-size: 0.45rem;
 }
 </style>
