@@ -1,32 +1,37 @@
 <template>
-  <div class="container">
+  <div>
     <!--header-->
-    <van-row class="header-div">
-      <van-col>
-        <img class="logo" width="55" src="../assets/logo.png" />
-      </van-col>
-      <van-col>
-        <van-search
-          class="header-search"
-          v-model="search_v"
-          background="#f0"
-          placeholder="请输入搜索关键词"
-        />
-      </van-col>
-      <van-col>
-        <div class="loginBtn">登录</div>
-      </van-col>
-    </van-row>
+    <van-sticky>
+      <van-row>
+        <van-col>
+          <img class="logo" width="55" src="../assets/logo.png" />
+        </van-col>
+        <van-col>
+          <van-search
+            class="header-search"
+            v-model="search_v"
+            background="#f0"
+            placeholder="请输入搜索关键词"
+          />
+        </van-col>
+        <van-col>
+          <div class="loginBtn">登录</div>
+        </van-col>
+      </van-row>
+    </van-sticky>
     <!-- Swipe -->
     <!-- 滚动的tab按钮列表 -->
-    <van-tabs>
-      <van-tab v-for="(n, inx) in tabBtnList" :key="inx" :title="n">
-        <!-- 内容 -->
-        <!-- {{n}} -->
-      </van-tab>
+    <van-sticky>
+      <van-tabs>
+        <van-tab v-for="(n, inx) in tabBtnList" :key="inx" :title="n">
+          <!-- 内容 -->
+          <!-- {{n}} -->
+        </van-tab>
+      </van-tabs>
+    </van-sticky>
 
-      <!-- 轮播图 -->
-    </van-tabs>
+    <!-- 轮播图 -->
+
     <van-swipe class="my-swipe" :autoplay="1000" indicator-color="white">
       <van-swipe-item v-for="(url, inx) in imgObj" :key="inx" :title="url">
         <img :src="url" />
@@ -107,8 +112,8 @@ export default {
     return {
       search_v: "",
       tabBtnList: "",
-      imgObj:"",
-      goods_icon:"",
+      imgObj: "",
+      goods_icon: "",
       active: "",
     };
   },
@@ -133,7 +138,7 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  /* overflow: scroll; */
+   overflow: scroll;
 }
 .logo {
   width: 2.2rem;
