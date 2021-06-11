@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--header-->
-    <van-sticky>
+    <van-sticky :v-bind:class="menu">
       <van-row>
         <van-col>
           <img class="logo" width="55" src="../assets/logo.png" />
@@ -18,7 +18,7 @@
           <div class="loginBtn">登录</div>
         </van-col>
       </van-row>
-    </van-sticky>
+   </van-sticky>
     <!-- Swipe -->
     <!-- 滚动的tab按钮列表 -->
     <van-sticky>
@@ -31,7 +31,6 @@
     </van-sticky>
 
     <!-- 轮播图 -->
-
     <van-swipe class="my-swipe" :autoplay="1000" indicator-color="white">
       <van-swipe-item v-for="(url, inx) in imgObj" :key="inx" :title="url">
         <img :src="url" />
@@ -94,8 +93,8 @@
     </div>
     <!-- 底部tabbar -->
     <van-tabbar v-model="active" active-color="#ee0a24">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="search" dot>分类</van-tabbar-item>
+      <van-tabbar-item to="home" icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item to="/category" icon="search" dot>分类</van-tabbar-item>
       <van-tabbar-item icon="friends-o" badge="5">值得买</van-tabbar-item>
       <van-tabbar-item icon="setting-o" badge="20">购物车</van-tabbar-item>
       <van-tabbar-item icon="setting-o" badge="20">个人</van-tabbar-item>
@@ -117,6 +116,13 @@ export default {
       active: "",
     };
   },
+  methods: {
+    menu(){
+      this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
+      console.log(this.scroll)
+      console.log(this.isFixed)
+    }
+  },
   created() {
     axios.get("http://localhost:5555/get_tabble_list").then((_d) => {
       console.log(_d.data);
@@ -128,6 +134,9 @@ export default {
     axios.get("http://localhost:5555/get_goods_icon").then((_d) => {
       this.goods_icon = _d.data;
     });
+  },
+  mounted() {
+    window.addEventListener('scroll',this.menu)
   },
 };
 </script>
